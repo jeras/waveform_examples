@@ -1,0 +1,42 @@
+MSIM=$(HOME)/altera/13.0sp1/modelsim_ase/bin
+
+#TCL='\
+#add wave -position insertpoint sim:/tb_struct_packed/*
+#run -all; quit
+#wave export -format vcd -file tb_struct_packed
+#'
+
+OPT = +define+MODELSIM +define+WAVE
+
+all: struct_packed struct_unpacked array_packed array_unpacked datatypes t_string t_enumerate
+
+work:
+	$(MSIM)/vlib work
+
+struct_packed: work struct_packed.sv
+	$(MSIM)/vlog $(OPT) struct_packed.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' struct_packed
+
+struct_unpacked: work struct_unpacked.sv
+	$(MSIM)/vlog $(OPT) struct_unpacked.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' struct_unpacked
+
+array_packed: work array_packed.sv
+	$(MSIM)/vlog $(OPT) array_packed.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' array_packed
+
+array_unpacked: work array_unpacked.sv
+	$(MSIM)/vlog $(OPT) array_unpacked.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' array_unpacked
+
+datatypes: work datatypes.sv
+	$(MSIM)/vlog $(OPT) datatypes.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' datatypes
+
+t_string: work t_string.sv
+	$(MSIM)/vlog $(OPT) t_string.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' t_string
+
+t_enumerate: work t_enumerate.sv
+	$(MSIM)/vlog $(OPT) t_enumerate.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' t_enumerate
