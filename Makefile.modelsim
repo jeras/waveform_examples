@@ -8,7 +8,8 @@ MSIM=$(HOME)/altera/13.0sp1/modelsim_ase/bin
 
 OPT = +define+MODELSIM +define+WAVE
 
-all: struct_packed struct_unpacked array_packed array_unpacked datatypes t_string t_enumerate
+all: struct_packed struct_unpacked array_packed array_unpacked datatypes t_string t_enumerate \
+ t_array_packed_3d t_array_unpacked_3d
 
 work:
 	$(MSIM)/vlib work
@@ -40,3 +41,12 @@ t_string: work t_string.sv
 t_enumerate: work t_enumerate.sv
 	$(MSIM)/vlog $(OPT) t_enumerate.sv
 	$(MSIM)/vsim -c -do 'run -all; quit' t_enumerate
+
+t_array_packed_3d: work t_array_packed_3d.sv
+	$(MSIM)/vlog $(OPT) t_array_packed_3d.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' t_array_packed_3d
+
+t_array_unpacked_3d: work t_array_unpacked_3d.sv
+	$(MSIM)/vlog $(OPT) t_array_unpacked_3d.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' t_array_unpacked_3d
+
