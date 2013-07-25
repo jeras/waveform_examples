@@ -1,4 +1,4 @@
-module t_enumerate;
+module enumerate;
 
 // system signals
 logic clk = 1'b1;
@@ -38,4 +38,4 @@ initial begin
   $finish();
 end
 
-endmodule: t_enumerate
+endmodule: enumerate

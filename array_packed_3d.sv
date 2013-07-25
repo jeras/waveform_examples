@@ -1,4 +1,4 @@
-module t_array_packed_3d;
+module array_packed_3d;
 
 // system signals
 logic clk = 1'b1;
@@ -24,4 +24,4 @@ initial begin
   $finish();
 end
 
-endmodule: t_array_packed_3d
+endmodule: array_packed_3d

@@ -1,4 +1,4 @@
-module t_array_unpacked_3d;
+module array_unpacked_3d;
 
 // system signals
 logic clk = 1'b1;
@@ -24,4 +24,4 @@ initial begin
   $finish();
 end
 
-endmodule: t_array_unpacked_3d
+endmodule: array_unpacked_3d
