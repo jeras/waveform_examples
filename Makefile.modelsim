@@ -9,7 +9,7 @@ MSIM=$(HOME)/altera/13.0sp1/modelsim_ase/bin
 OPT = +define+MODELSIM +define+WAVE
 
 all: struct_packed struct_unpacked array_packed array_unpacked datatypes t_string enumerate \
- array_packed_3d array_unpacked_3d union_packed
+ array_packed_3d array_unpacked_3d union_packed wav_interface_tb
 
 work:
 	$(MSIM)/vlib work
@@ -53,3 +53,7 @@ array_unpacked_3d: work array_unpacked_3d.sv
 union_packed: work union_packed.sv
 	$(MSIM)/vlog $(OPT) union_packed.sv
 	$(MSIM)/vsim -c -do 'run -all; quit' union_packed
+
+wav_interface_tb: work wav_interface_tb.sv wav_interface.sv
+	$(MSIM)/vlog $(OPT) wav_interface_tb.sv wav_interface.sv
+	$(MSIM)/vsim -c -do 'run -all; quit' wav_interface_tb
