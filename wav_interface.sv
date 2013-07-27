@@ -42,11 +42,12 @@ module wav_interface_src (
   // control input
   input  logic ctl_run,
   // streaming interface source
-  str.src      str
+  wav_interface_str.src str
 );
 
 // transfer
-logic trn = str.tvalid & str.tready;
+logic trn;
+assign trn = str.tvalid & str.tready;
 
 // valid depends on the control run signal
 always @ (posedge str.clk, posedge str.rst)
@@ -68,11 +69,12 @@ module wav_interface_drn (
   // status output
   output logic sts_end,
   // streaming interface source
-  str.drn      str
+  wav_interface_str.drn str
 );
 
 // transfer
-logic trn = str.tvalid & str.tready;
+logic trn;
+assign trn = str.tvalid & str.tready;
 
 assign str.tready = 1'b1;
 
@@ -102,7 +104,7 @@ module wav_interface #(
 // interface instance
 wav_interface_str #(
   .DW (DW)
-) stream (
+) str (
   .clk (clk),
   .rst (rst)
 );
@@ -112,8 +114,7 @@ wav_interface_src src (
   // control input
   .ctl_run (ctl_run),
   // streaming interface source
-  .str     (stream)
-//  .str     (str.src)
+  .str     (str.src)
 );
 
 // stream drain
@@ -121,8 +122,7 @@ wav_interface_drn drn (
   // status output
   .sts_end (sts_end),
   // streaming interface drain
-  .str     (stream)
-//  .str     (str.drn)
+  .str     (str.drn)
 );
 
 endmodule: wav_interface
